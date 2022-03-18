@@ -6,20 +6,16 @@ public class TabelaAlunos {
     private String alunos[];
 
     public TabelaAlunos(int nd) {
-        //Util.valida (nd > 0, "Número de dígitos inválido");
         int nPos = (int) (Math.pow(10, nd) + 0.5);
-        System.out.println("nPos=" + nPos);
         alunos = new String[nPos];
         maxMatric = nPos - 1;
     }
 
     public void adicionaAluno(int matr, String nome) {
-        // Util.valida (matr >= 0 && matr < maxMatric, "Número de matrícula inválido!");
         alunos[matr] = nome;
     }
 
     public String obtemAluno(int matr) {
-        // Util.valida (matr >= 0 && matr < maxMatric, "Número de matrícula inválido!");
         return alunos[matr];
     }
 

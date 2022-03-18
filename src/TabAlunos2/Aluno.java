@@ -1,12 +1,25 @@
 package TabAlunos2;
 
 class Aluno {
-    public int matr;
-    public String nome;
+    private int matr;
+    private String nome;
 
-    public Aluno(int mat, String n) {
-        matr = mat;
-        nome = n;
+    public Aluno(int matr, String nome) {
+        this.matr = matr;
+        this.nome = nome;
+    }
+
+    public int getMatr() {
+        return matr;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    @Override
+    public String toString() {
+        return matr + " :" + nome;
     }
 }
 

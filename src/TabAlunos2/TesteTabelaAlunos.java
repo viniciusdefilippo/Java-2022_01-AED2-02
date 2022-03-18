@@ -3,7 +3,7 @@ package TabAlunos2;
 public class TesteTabelaAlunos {
     public static void main(String[] args) {
 
-        TabelaAlunos tab = new TabelaAlunos(10);
+        TabelaAlunos tab = new TabelaAlunos(1);
 
         tab.adicionaAluno(2, "Beatriz Miranda de Oliveira");
         tab.adicionaAluno(1, "Maria Cláudia Santos");
@@ -12,6 +12,8 @@ public class TesteTabelaAlunos {
         tab.adicionaAluno(7, "Pedro Cardoso Queiroz");
 
         tab.imprimeTabelaAlunos();
+
+        System.out.println(tab.obtemAluno(5));
 
     }
 }
