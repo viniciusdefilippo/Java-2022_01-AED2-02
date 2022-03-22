@@ -1,19 +1,53 @@
 package TabAlunos2;
 
+import java.io.*;
+
 public class TesteTabelaAlunos {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        TabelaAlunos tab = new TabelaAlunos(1);
+        //String fileName = "nomes.csv";
+        String fileName = "nomes_ordem.csv";
+        // https://www.fakenamegenerator.com/order.php
+        TabelaAlunos tab = readFakeData(fileName);
+        //tab.imprimeTabelaAlunos();
 
-        tab.adicionaAluno(2, "Beatriz Miranda de Oliveira");
-        tab.adicionaAluno(1, "Maria Cláudia Santos");
-        tab.adicionaAluno(5, "João Fernando Silva");
-        tab.adicionaAluno(9, "Ana Paula Souza");
-        tab.adicionaAluno(7, "Pedro Cardoso Queiroz");
+        double soma = 0;
+        int numRepeticoes = 1;
 
-        tab.imprimeTabelaAlunos();
+        for (int i = 0; i < numRepeticoes; i++) {
+            long startTime = System.nanoTime();
+            System.out.println(tab.pesquisaAlunoPorNome("Nicolash Souza Silva"));
+            long totalTime = System.nanoTime() - startTime;
+            soma += totalTime;
+            //double elapsedTimeInSecond = (double) totalTime / 1_000_000_000;
+        }
+        System.out.printf("Pesquisa Sequencial: Média tempo execução = %.0f\n", soma / numRepeticoes);
 
-        System.out.println(tab.obtemAluno(5));
+        // para executar este teste com sucesso, os nomes precisam estar ordenados
+        soma = 0;
+        for (int i = 0; i < numRepeticoes; i++) {
+            long startTime = System.nanoTime();
+            System.out.println(tab.pesquisaBinariaAlunoPorNome("Nicolash Souza Silva"));
+            long totalTime = System.nanoTime() - startTime;
+            soma += totalTime;
+            //double elapsedTimeInSecond = (double) totalTime / 1_000_000_000;
+        }
+        System.out.printf("Pesquisa Binaria: Média tempo execução = %.0f\n", soma / numRepeticoes);
+    }
 
+    public static TabelaAlunos readFakeData(String fileName) throws IOException {
+
+        TabelaAlunos tab = new TabelaAlunos(4);
+        int numTotalRegistros = 9999;
+        BufferedReader arq = new BufferedReader(new FileReader(fileName));
+
+        for (int i = 0; i < numTotalRegistros; i++) {
+            String data[] = new String[3];
+            data = arq.readLine().split(";");
+
+            tab.adicionaAluno(Integer.parseInt(data[0]), data[1]);
+            //tab.adicionaAlunoOrdenado(Integer.parseInt(data[0]), data[1]);
+        }
+        return tab;
     }
 }
