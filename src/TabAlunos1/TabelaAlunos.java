@@ -2,6 +2,7 @@ package TabAlunos1;
 
 // Indice da tabela é o número de matrícula
 public class TabelaAlunos {
+
     private int maxMatric;
     private String alunos[];
 

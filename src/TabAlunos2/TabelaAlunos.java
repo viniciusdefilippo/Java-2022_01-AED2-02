@@ -30,45 +30,61 @@ public class TabelaAlunos {
         nElem++;
     }
 
-    // Realiza pesquisa sequencial no vetor
-    public String obtemAluno(int matr) {
+    // Realiza pesquisa sequencial no vetor - por matricula
+    public boolean pesquisaAlunoPorMatricula(int matr) {
         int atual = 0;
         while (atual < nElem) {
-            if (alunos[atual].getMatr() == matr)
-                return alunos[atual].getNome();
-            else
-                atual++;
+            if (alunos[atual].getMatr() == matr) return true;
+            else atual++;
         }
-        return null;
+        return false;
     }
 
-    // Realiza pesquisa sequencial no vetor
+    // Realiza pesquisa sequencial no vetor - por nome
     public boolean pesquisaAlunoPorNome(String nome) {
-        boolean encontrado = false;
-        for (int i = 0; i < nElem; i++) {
-            if (alunos[i].getNome().equals(nome)) {
-                encontrado = true;
-            }
-        }
-        return encontrado;
+        for (int i = 0; i < nElem; i++)
+            if (alunos[i].getNome().equals(nome)) return true;
+        return false;
     }
 
+    // Realiza pesquisa binária no vetor - por matricula
+    public boolean pesquisaBinariaAlunoPorMatricula(int matr) {
+
+        int inf = 0;
+        int sup = nElem - 1;
+        int meio = (nElem - 1) / 2;
+
+        while (inf <= sup) {
+            meio = (inf + sup) / 2;
+            if (alunos[meio].getMatr() == matr)
+                return true;
+            else if (alunos[meio].getMatr() < matr)
+                inf = meio + 1;
+            else
+                sup = meio - 1;
+        }
+        return false;
+    }
+
+    // Realiza pesquisa binária no vetor - por nome
     public boolean pesquisaBinariaAlunoPorNome(String nome) {
 
-        boolean encontrado = false;
-        int inf = 0, sup = nElem - 1, meio = (nElem - 1) / 2;
+        int inf = 0;
+        int sup = nElem - 1;
+        int meio = (nElem - 1) / 2;
 
-        while (!encontrado && inf <= sup) {
+        while (inf <= sup) {
             meio = (inf + sup) / 2;
             if (alunos[meio].getNome().equals(nome))
-                encontrado = true;
+                return true;
             else if (alunos[meio].getNome().compareTo(nome) < 0)
                 inf = meio + 1;
             else
                 sup = meio - 1;
         }
-        return encontrado;
+        return false;
     }
+
 
     public void imprimeTabelaAlunos() {
         for (Aluno aluno : alunos) {
