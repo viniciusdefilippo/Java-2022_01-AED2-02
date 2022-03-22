@@ -1,6 +1,8 @@
 package TabAlunos2;
 
 import java.io.*;
+import java.text.Normalizer;
+import java.util.regex.Pattern;
 
 public class TesteTabelaAlunos {
     public static void main(String[] args) throws IOException {
@@ -9,7 +11,7 @@ public class TesteTabelaAlunos {
         String fileName = "nomes_ordem.csv";
         // https://www.fakenamegenerator.com/order.php
         TabelaAlunos tab = readFakeData(fileName);
-        //tab.imprimeTabelaAlunos();
+        tab.imprimeTabelaAlunos();
 
         double soma = 0;
         int numRepeticoes = 1;
@@ -44,10 +46,16 @@ public class TesteTabelaAlunos {
         for (int i = 0; i < numTotalRegistros; i++) {
             String data[] = new String[3];
             data = arq.readLine().split(";");
-
-            tab.adicionaAluno(Integer.parseInt(data[0]), data[1]);
+            String nome = removeAccents(data[1]);
+            tab.adicionaAluno(Integer.parseInt(data[0]), nome);
             //tab.adicionaAlunoOrdenado(Integer.parseInt(data[0]), data[1]);
         }
         return tab;
+    }
+
+    public static String removeAccents(String value) {
+        String normalizer = Normalizer.normalize(value, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(normalizer).replaceAll("");
     }
 }

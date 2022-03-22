@@ -19,7 +19,7 @@ class Aluno {
 
     @Override
     public String toString() {
-        return matr + " :" + nome;
+        return matr + ": " + nome;
     }
 }
 
