@@ -41,10 +41,17 @@ public class TabelaAlunos {
     }
 
     // Realiza pesquisa sequencial no vetor - por nome
-    public boolean pesquisaAlunoPorNome(String nome) {
-        for (int i = 0; i < nElem; i++)
-            if (alunos[i].getNome().equals(nome)) return true;
-        return false;
+    public int pesquisaAlunoPorNome(String nome) {
+        int cont = 0;
+        for (int i = 0; i < nElem; i++) {
+            cont++;
+            if (alunos[i].getNome().equals(nome)) {
+                //System.out.println("Registro encontrado!");
+                return cont;
+            }
+        }
+        //System.out.println("Registro não encontrado.");
+        return cont;
     }
 
     // Realiza pesquisa binária no vetor - por matricula
@@ -67,29 +74,34 @@ public class TabelaAlunos {
     }
 
     // Realiza pesquisa binária no vetor - por nome
-    public boolean pesquisaBinariaAlunoPorNome(String nome) {
+    public int pesquisaBinariaAlunoPorNome(String nome) {
 
         int inf = 0;
         int sup = nElem - 1;
         int meio = (nElem - 1) / 2;
+        int cont = 0;
 
         while (inf <= sup) {
+            cont++;
             meio = (inf + sup) / 2;
-            if (alunos[meio].getNome().equals(nome))
-                return true;
-            else if (alunos[meio].getNome().compareTo(nome) < 0)
+            //System.out.println(alunos[meio].getNome());
+            if (alunos[meio].getNome().equals(nome)) {
+                //System.out.println("Registro encontrado!");
+                return cont;
+            } else if (alunos[meio].getNome().compareTo(nome) < 0)
                 inf = meio + 1;
             else
                 sup = meio - 1;
         }
-        return false;
+        //System.out.println("Registro não encontrado.");
+        return cont;
     }
 
 
     public void imprimeTabelaAlunos() {
-        for (Aluno aluno : alunos) {
-            if (aluno != null)
-                System.out.println(aluno);
+        for (int i = 0; i < nElem; i++) {
+            if (alunos[i] != null)
+                System.out.println("[" + i + "]" + alunos[i]);
         }
     }
 }

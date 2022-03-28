@@ -14,27 +14,30 @@ public class TesteTabelaAlunos {
         tab.imprimeTabelaAlunos();
 
         double soma = 0;
-        int numRepeticoes = 1;
+        int cont = 0;
+        int numRepeticoes = 10;
 
         for (int i = 0; i < numRepeticoes; i++) {
             long startTime = System.nanoTime();
-            System.out.println(tab.pesquisaAlunoPorNome("Nicolash Souza Silva"));
+            cont += tab.pesquisaAlunoPorNome("Kaua Costa Castro");
             long totalTime = System.nanoTime() - startTime;
             soma += totalTime;
             //double elapsedTimeInSecond = (double) totalTime / 1_000_000_000;
         }
         System.out.printf("Pesquisa Sequencial: Média tempo execução = %.0f\n", soma / numRepeticoes);
-
+        System.out.printf("Numero médio de operações = %d\n", cont / numRepeticoes);
         // para executar este teste com sucesso, os nomes precisam estar ordenados
         soma = 0;
+        cont = 0;
         for (int i = 0; i < numRepeticoes; i++) {
             long startTime = System.nanoTime();
-            System.out.println(tab.pesquisaBinariaAlunoPorNome("Nicolash Souza Silva"));
+            cont += tab.pesquisaBinariaAlunoPorNome("Kaua Costa Castro");
             long totalTime = System.nanoTime() - startTime;
             soma += totalTime;
             //double elapsedTimeInSecond = (double) totalTime / 1_000_000_000;
         }
         System.out.printf("Pesquisa Binaria: Média tempo execução = %.0f\n", soma / numRepeticoes);
+        System.out.printf("Numero médio de operações = %d\n", cont / numRepeticoes);
     }
 
     public static TabelaAlunos readFakeData(String fileName) throws IOException {
